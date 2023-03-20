@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hola</title>
+</head>
+<body>
+    <div class="div-container">
+    </div> 
+
+    <script>
+        const socket = new WebSocket(`ws://localhost:8000/ws/echo/`)
+        socket.onopen = function(event) {
+        console.log('WebSocket connection opened');
+        };
+
+        // When a message is received from the WebSocket server
+        socket.onmessage = function(event) {
+        console.log('Received message: ' + event.data);
+        };
+
+        // When an error occurs on the WebSocket connection
+        socket.onerror = function(event) {
+        console.error('WebSocket error: ', event);
+        };
+
+        // When the WebSocket connection is closed
+        socket.onclose = function(event) {
+        console.log('WebSocket connection closed');
+        };
+
+        // Send a message to the WebSocket server
+        socket.send('Hello, server!');
+    </script>
+</body>
+</html>
